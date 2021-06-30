@@ -1,13 +1,23 @@
 package com.example.stackoverflow.data.remote.response;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Owner {
+    @SerializedName("accept_rate")
     private int accept_rate;
+    @SerializedName("account_id")
     private int account_id;
+    @SerializedName("display_name")
     private String display_name;
+    @SerializedName("link")
     private String link;
+    @SerializedName("profile_image")
     private String profile_image;
+    @SerializedName("reputation")
     private int reputation;
+    @SerializedName("user_id")
     private int user_id;
+    @SerializedName("user_type")
     private String user_type;
 
 

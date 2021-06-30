@@ -1,23 +1,41 @@
 package com.example.stackoverflow.data.remote.response;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Question {
+    @SerializedName("accepted_answer_id")
     private long accepted_answer_id;
+    @SerializedName("answer_count")
     private int answer_count;
+    @SerializedName("closed_date")
     private long closed_date;
+    @SerializedName("closed_reason")
     private String closed_reason;
+    @SerializedName("content_license")
     private String content_license;
+    @SerializedName("creation_date")
     private long creation_date;
+    @SerializedName("is_answered")
     private Boolean is_answered;
+    @SerializedName("last_activity_date")
     private long last_activity_date;
+    @SerializedName("last_edit_date")
     private long last_edit_date;
+    @SerializedName("link")
     private String link;
+    @SerializedName("owner")
     private Owner owner;
+    @SerializedName("question_id")
     private long question_id;
+    @SerializedName("score")
     private int score;
+    @SerializedName("tags")
     private List<String> tags;
+    @SerializedName("title")
     private String title;
+    @SerializedName("view_count")
     private int view_count;
 
     public Question(long accepted_answer_id, int answer_count, long closed_date, String closed_reason, String content_license, long creation_date, Boolean is_answered, long last_activity_date, long last_edit_date, String link, Owner owner, long question_id, int score, List<String> tags, String title, int view_count) {

@@ -10,6 +10,8 @@ import com.example.stackoverflow.data.remote.response.Question;
 import com.example.stackoverflow.data.remote.response.QuestionList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -33,19 +35,32 @@ public class StackExchangeRepository {
 
     private void loadQuestionsList() {
         ApiInterface apiInterface = ApiClient.getRetrofit().create(ApiInterface.class);
-        Call<QuestionList> call = apiInterface.getQuestionsList();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -2);
+
+        Call<QuestionList> call = apiInterface.getQuestionsList(
+                calendar.getTimeInMillis() / 1000,
+                "desc",
+                "activity",
+                "True",
+                2,
+                "stackoverflow"
+        );
+
+        Log.d(TAG, "Response : " + call.request());
+        Log.d(TAG, "Response : " + call.request().url());
+        Log.d(TAG, "Response : " + call.request().toString());
         call.enqueue(new Callback<QuestionList>() {
             @Override
             public void onResponse(Call<QuestionList> call, Response<QuestionList> response) {
+                Log.d(TAG, "Response : " + response.raw());
                 if (response.isSuccessful()) {
                     _questionsList.clear();
                     if (response.body() != null) {
-                        for (Question question : response.body().getQuestions()) {
-                            if (question.getAnswer_count() > 1) {
-                                _questionsList.add(question);
-                            }
-                        }
+                        Log.d(TAG, "Response: " + response.body().getItems().size());
+                        _questionsList.addAll(response.body().getItems());
                     }
+                    Log.d(TAG, "Live Data " + _questionsList.size());
                     questionsList.postValue(_questionsList);
                 }
             }
